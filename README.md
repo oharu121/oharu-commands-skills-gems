@@ -36,12 +36,18 @@ Richer packages with reference data and templates. Skills are used by Claude Cod
 | Skill | Description |
 |-------|-------------|
 | [aws-architecture-diagram](skills/aws-architecture-diagram/) | Generates Draw.io XML diagrams with accurate AWS service icons, supporting technical and non-technical audience modes |
+| [aws-cost-estimate](skills/aws-cost-estimate/) | Generates AWS cost estimates from architecture documents using the AWS Price List API, with optional Calculator link generation |
 
 The AWS diagram skill includes:
 - 7 icon reference files covering Compute, Storage/Database, Networking, App Integration, Analytics/ML, Security, and Common icons
 - Layout guidelines for spacing, nesting, and style
 - A base Draw.io XML template
 - Non-technical audience mode with step-numbered edges and simplified labels
+
+The AWS cost estimate skill includes:
+- AWS Price List API reference with service codes, example queries, and jq parsing
+- Permissions reference for CLI, web search, and Playwright tools
+- Calculator automation guide for generating shareable links via browser automation
 
 ## Gems
 

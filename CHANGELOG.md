@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file.
 
+## [v1.1.0](https://github.com/oharu121/oharu-commands-skills-gems/releases/tag/v1.1.0) - 2026-03-13
+
+### Added
+
+- **Skills**
+  - `aws-cost-estimate` — AWS cost estimation skill with Price List API integration, web search fallback, and optional Calculator link generation via Playwright
+
 ## [v1.0.0](https://github.com/oharu121/oharu-commands-skills-gems/releases/tag/v1.0.0) - 2026-03-11
 
 Initial release.
