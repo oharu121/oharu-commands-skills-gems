@@ -1,6 +1,6 @@
 # oharu-commands-skills-gems
 
-A collection of custom commands, skills, and gems for [Claude Code](https://docs.anthropic.com/en/docs/claude-code) and [Claude](https://claude.ai).
+A collection of custom commands, skills, and gems for [Claude Code](https://docs.anthropic.com/en/docs/claude-code) and [Gemini](https://gemini.google.com).
 
 ## Commands
 
@@ -45,7 +45,7 @@ The AWS diagram skill includes:
 
 ## Gems
 
-System prompts for [Claude Projects](https://claude.ai). Create a new project on claude.ai and paste the gem content as the project instructions.
+System prompts for [Gemini Gems](https://gemini.google.com/gems). Create a new Gem in Gemini and paste the content as the gem instructions.
 
 | Gem | Description |
 |-----|-------------|
