@@ -1,6 +1,8 @@
 ---
 name: aws-architecture-diagram
-description: Generate Draw.io XML architecture diagrams with accurate AWS service icons. Use when the user asks to create, update, or generate an AWS architecture diagram, mentions Draw.io diagrams, wants to visualize AWS infrastructure, needs architecture documentation, or says things like "diagram this architecture", "create an AWS diagram", "visualize this setup", or "document this infrastructure". Also use when discussing system design, cloud architecture, or infrastructure planning that would benefit from a visual diagram.
+description: Generate Draw.io XML architecture diagrams with accurate AWS service icons. Use when the user asks to create, update, or visualize an AWS architecture diagram, or mentions Draw.io diagrams for AWS infrastructure.
+user-invocable: true
+argument-hint: "describe the AWS architecture to diagram"
 ---
 
 # AWS Architecture Diagram Skill
