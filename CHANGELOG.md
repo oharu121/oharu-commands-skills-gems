@@ -2,6 +2,32 @@
 
 All notable changes to this project will be documented in this file.
 
+## [v1.3.1](https://github.com/oharu121/oharu-commands-skills-gems/releases/tag/v1.3.1) - 2026-03-19
+
+### Added
+
+- **Skills**
+  - `release` — config file support (`language`, `repo_mode`, `preflight_confirm`) for persistent preferences; skips language and mode prompts on subsequent runs while always running pre-flight
+
+## [v1.3.0](https://github.com/oharu121/oharu-commands-skills-gems/releases/tag/v1.3.0) - 2026-03-19
+
+### Added
+
+- **Skills**
+  - `release` — restructured from a monolithic command into a modular skill with repo detection, `AskUserQuestion`-driven pre-flight confirmation, and pattern files for skills-gems, npm, Python, and monorepo repos
+
+### Removed
+
+- **Commands**
+  - `release` — replaced by the `skills/release` skill; install via `cp -r skills/release .claude/skills/release`
+
+## [v1.2.0](https://github.com/oharu121/oharu-commands-skills-gems/releases/tag/v1.2.0) - 2026-03-19
+
+### Added
+
+- **Skills**
+  - `bedrock-ops` — AWS Bedrock KB + S3 data pipeline management with MFA session auto-refresh, dry-run enforcement, identity verification, and service blocklist
+
 ## [v1.1.0](https://github.com/oharu121/oharu-commands-skills-gems/releases/tag/v1.1.0) - 2026-03-13
 
 ### Added

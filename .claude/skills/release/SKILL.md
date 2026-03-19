@@ -203,6 +203,21 @@ If remote has new commits, use AskUserQuestion:
 
 Pull: `git pull --rebase` — stop on merge conflicts.
 
+### Step 8.5: Check README and CHANGELOG
+
+Check whether `README.md` and `CHANGELOG.md` need updating based on the changes in this release:
+
+**README.md — check for:**
+- New skills or commands not yet listed in their respective tables
+- Removed or renamed skills/commands still listed
+- Installation instructions that reference outdated paths or file names
+
+**CHANGELOG.md — check for:**
+- Missing entry for the current version being released
+- Entries for versions released since the last CHANGELOG update
+
+If updates are needed, make them now before committing — so docs land in the same commit as the code. If README and CHANGELOG are already accurate, state so and continue.
+
 ### Step 9: Show Changes & Commit
 
 ```bash
