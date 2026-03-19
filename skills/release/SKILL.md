@@ -14,12 +14,43 @@ prompt with plain text and wait for a reply — always use the tool.
 ## Path Variables
 
 - `SKILLS_DIR` = `.claude/skills/release`
+- `CONFIG_FILE` = `.claude/skills/release/config.json`
+
+---
+
+## Config File
+
+Read `CONFIG_FILE` at startup if it exists:
+
+```bash
+cat .claude/skills/release/config.json 2>/dev/null
+```
+
+**Schema:**
+
+```json
+{
+  "language": "en",
+  "repo_mode": "skills-gems",
+  "preflight_confirm": false
+}
+```
+
+| Field | Effect when set |
+|-------|----------------|
+| `language` | Skip Step 1.5 — use this language directly |
+| `repo_mode` | Skip detection — use this mode directly; pre-flight still runs |
+| `preflight_confirm: false` | Skip the confirmation gate — pre-flight runs silently without asking "Proceed?" |
+
+All fields are optional. Missing fields fall back to the interactive flow.
 
 ---
 
 ## Phase 0: Repo Detection
 
-Run these checks:
+**If `repo_mode` is set in config:** skip detection, use the configured mode. State: "Using configured mode: `<mode>`."
+
+**Otherwise**, run detection:
 
 ```bash
 ls package.json pyproject.toml uv.lock skills/ 2>/dev/null
@@ -36,7 +67,9 @@ Classify into one or more modes:
 | Two or more of the above | **monorepo** |
 | None of the above | **generic** |
 
-Use AskUserQuestion to announce the detected mode and confirm pre-flight steps:
+**If `preflight_confirm` is `false` in config:** skip the confirmation gate, announce mode in plain text and proceed directly to Phase 1.
+
+**Otherwise**, use AskUserQuestion to confirm:
 
 > "Detected: **\<mode\>**. Pre-flight will run: \<summary from pattern file\>. Proceed?"
 
@@ -49,9 +82,12 @@ Options:
 
 ## Phase 1: Pre-flight
 
-Read and follow `SKILLS_DIR/patterns/<detected-mode>.md`.
+Read and follow `SKILLS_DIR/patterns/<mode>.md`.
 
-If pre-flight passes or is skipped, continue to Phase 2.
+Pre-flight always runs for the configured/detected mode — `preflight_confirm: false` only
+skips the confirmation gate, not the pre-flight itself.
+
+If pre-flight passes, continue to Phase 2.
 If pre-flight fails, stop — do not continue until resolved.
 
 ---
@@ -65,6 +101,16 @@ From the session, identify:
 - Which files were modified
 - What the key changes were
 - Any breaking changes
+
+### Step 1.5: Ask for Language
+
+Use AskUserQuestion:
+- "What language should the issue, plan, and release notes be written in?"
+- Options: "English", "Japanese (日本語)", "Other" (free text for any other language)
+
+**Store the selected language.** Apply it to all generated content: plan file, issue title,
+issue body, acceptance criteria, and release notes. Commit messages always stay in English
+regardless of this setting (git convention).
 
 ### Step 2: Ask for Title
 
@@ -97,6 +143,9 @@ Always prefix with "v". **Store the selected version** for later steps.
 Read `SKILLS_DIR/templates/plan.md` for the template and rules.
 
 Create `.plans/<slugified-title>.md` filled with real content from the session.
+Write all narrative content (Context, Approach, Changes, Guard Rails, Verification)
+in the language selected in Step 1.5. Section headings may stay in English for
+template consistency, but all prose must be in the selected language.
 
 ### Step 6: Create GitHub Issue
 
@@ -201,6 +250,8 @@ gh release create v<version> \
   --notes "<plan-content-without-header>"
 ```
 
+Write release notes in the language selected in Step 1.5.
+
 ### Step 13: Close Issue & Output
 
 ```bash
@@ -209,25 +260,32 @@ gh issue close <issue-number> --comment "Released in v<version>"
 gh issue close <issue-number> --comment "Shipped in <commit-sha>"
 ```
 
-**If version was tagged:**
-```
-Release complete!
+**If config did not exist at startup**, use AskUserQuestion:
+- "Save these preferences for future runs? (skips detection and language prompts)"
+- Options: "Yes, save to `.claude/skills/release/config.json`", "No, ask me each time"
 
-Issue: <issue-url>
-Version: <old> -> <new>
-Tag: v<new>
-Release: <github-release-url>
-```
+If yes, write `CONFIG_FILE` with the language and mode used this run, and `preflight_confirm: false`.
 
-**If version was skipped:**
-```
-Changes committed and pushed!
+---
 
-Issue: <issue-url>
-Commit: <commit-message>
+**If version was tagged**, output as plain markdown prose (not a fenced code block).
+Use markdown link syntax so URLs are clickable in the IDE:
 
-No version tag or GitHub release (skipped).
-```
+> Release complete!
+>
+> - **Issue:** `[#N](full-issue-url)`
+> - **Version:** old → new
+> - **Tag:** `vX.Y.Z`
+> - **Release:** `[vX.Y.Z](full-release-url)`
+
+**If version was skipped**, output as plain markdown prose:
+
+> Changes committed and pushed!
+>
+> - **Issue:** `[#N](full-issue-url)`
+> - **Commit:** `commit-message`
+>
+> No version tag or GitHub release (skipped).
 
 ---
 
