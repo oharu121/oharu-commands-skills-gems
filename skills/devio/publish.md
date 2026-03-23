@@ -1,17 +1,9 @@
-指定された記事ファイルをContentfulにドラフトとして公開、または既存のドラフトを更新します。
-
-ファイルパス: $ARGUMENTS
-
-# 重要: セキュリティに関する注意
-
-**`.env` ファイルを直接読まないこと。** すべてのContentful API操作は `scripts/contentful.py` を通じて行う。このスクリプトが内部で `.env` を読み込むため、CMAトークンがLLMのコンテキストに入ることはない。
-
 # 前提チェック（記事の処理前に必ず実行）
 
 ## Step 1: 環境チェック
 
 ```bash
-python3 scripts/contentful.py setup --check
+python3 ${CLAUDE_SKILL_DIR}/scripts/contentful.py setup --check
 ```
 
 - `{"ok": true}` が返れば次のステップへ
@@ -29,25 +21,25 @@ python3 scripts/contentful.py setup --check
 
 1. **Space一覧の取得**:
    ```bash
-   python3 scripts/contentful.py setup --list-spaces
+   python3 ${CLAUDE_SKILL_DIR}/scripts/contentful.py setup --list-spaces
    ```
    複数ある場合はユーザーに選択してもらう。
 
 2. **Content Type一覧の取得**:
    ```bash
-   python3 scripts/contentful.py setup --list-content-types --space-id {selected_space_id}
+   python3 ${CLAUDE_SKILL_DIR}/scripts/contentful.py setup --list-content-types --space-id {selected_space_id}
    ```
    ブログ記事用のContent Type（通常 `blogPost`）を特定する。
 
 3. **Author一覧の取得**:
    ```bash
-   python3 scripts/contentful.py setup --list-authors --space-id {selected_space_id}
+   python3 ${CLAUDE_SKILL_DIR}/scripts/contentful.py setup --list-authors --space-id {selected_space_id}
    ```
    ユーザーに選択してもらう。
 
 4. **設定の保存**:
    ```bash
-   python3 scripts/contentful.py setup --save --space-id {id} --author-id {id} --content-type-id {id}
+   python3 ${CLAUDE_SKILL_DIR}/scripts/contentful.py setup --save --space-id {id} --author-id {id} --content-type-id {id}
    ```
 
 # 記事の公開手順
@@ -55,13 +47,15 @@ python3 scripts/contentful.py setup --check
 1. 指定されたファイルを読み込み、YAML frontmatter（title, slug, tags, articleId, publishedAt）と本文を確認する
 2. frontmatter に `articleId` があるかどうかで **新規作成** か **更新** かを判定する
 
+> **注意（タグ）**: frontmatter のタグ名は公開時にスクリプトが自動的に Contentful のタグIDに変換します。タグキャッシュの鮮度警告が表示された場合は、`python3 ${CLAUDE_SKILL_DIR}/scripts/contentful.py tags --refresh` の実行を提案してください。タグ名が見つからない場合はエラーになるので、ユーザーに `tags --search` で正しいタグ名を確認してもらってください。
+
 ## 新規作成フロー（articleId なし）
 
 1. 内容をユーザーに表示し、公開してよいか確認する
 2. 記事本文から1-2文の概要文（excerpt）を生成し、AskUserQuestion でユーザーに提示する。ユーザーは承認、編集、または自分で書き直すことができる
 3. 承認された excerpt を使って、スクリプトでドラフトエントリを作成する:
    ```bash
-   python3 scripts/contentful.py create <article-file> --excerpt "承認されたexcerpt"
+   python3 ${CLAUDE_SKILL_DIR}/scripts/contentful.py create <article-file> --excerpt "承認されたexcerpt"
    ```
 4. 成功したら、レスポンスJSONから取得した `entry_id` を記事ファイルの frontmatter に `articleId` として書き戻す
 5. frontmatter に `publishedAt` がなければ、現在の日時（ISO 8601形式、例: `2026-03-05T12:00:00+09:00`）を `publishedAt` として追記する。既に `publishedAt` がある場合は変更しない
@@ -70,7 +64,7 @@ python3 scripts/contentful.py setup --check
 
 1. スクリプトで既存エントリの全データを取得する:
    ```bash
-   python3 scripts/contentful.py get <article-file>
+   python3 ${CLAUDE_SKILL_DIR}/scripts/contentful.py get <article-file>
    ```
 2. ローカルで変更されたフィールド（title, slug, content, tags）と、Contentful上の現在の値を比較し、差分をユーザーに表示する
 3. 既存エントリの excerpt を確認し、AskUserQuestion でユーザーに以下を選択してもらう:
@@ -84,7 +78,7 @@ python3 scripts/contentful.py setup --check
 
 5. ユーザーの確認が取れたら、スクリプトで更新する:
    ```bash
-   python3 scripts/contentful.py update <article-file> --excerpt "確定したexcerpt"
+   python3 ${CLAUDE_SKILL_DIR}/scripts/contentful.py update <article-file> --excerpt "確定したexcerpt"
    ```
 
 # 成功時

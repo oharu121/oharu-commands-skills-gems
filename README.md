@@ -22,8 +22,6 @@ Markdown instruction files that define slash commands for Claude Code. Place the
 |---------|-------------|
 | [generate-bruno-files](commands/generate-bruno-files.md) | Reads source code to extract HTTP requests and generates `.bru` files for the [Bruno](https://www.usebruno.com/) API client |
 | [migrate-env-to-1password](commands/migrate-env-to-1password.md) | Interactively migrates `.env` secrets to 1Password using `op` CLI, replacing values with `op://` references (Japanese) |
-| [publish-developersio-articles](commands/publish-developersio-articles.md) | Publishes Markdown articles to Contentful CMS as drafts, with create and update support |
-| [write-developersio-articles](commands/write-developersio-articles.md) | DevelopersIO blog writing assistant that follows media guidelines and handles frontmatter (Japanese) |
 
 ## Skills
 
@@ -34,6 +32,7 @@ Richer packages with reference data and templates. Skills are used by Claude Cod
 | [aws-architecture-diagram](skills/aws-architecture-diagram/) | Generates Draw.io XML diagrams with accurate AWS service icons, supporting technical and non-technical audience modes |
 | [aws-cost-estimate](skills/aws-cost-estimate/) | Generates AWS cost estimates from architecture documents using the AWS Price List API, with optional Calculator link generation |
 | [bedrock-ops](skills/bedrock-ops/) | Manages the AWS Bedrock KB + S3 data pipeline with safety guardrails: S3 sync with force-upload, KB ingestion polling, cost monitoring, and MFA session auto-refresh |
+| [devio](skills/devio/) | DevelopersIO blog workflow: draft articles with tag search integration, publish to Contentful with tag resolution and auto-translation (Japanese) |
 | [release](skills/release/) | Repo-aware release automation with pre-flight checks, GitHub issue + plan file creation, commit, tag, push, and GitHub release. Supports npm, Python, and skills-gems repos |
 
 The AWS diagram skill includes:

@@ -13,8 +13,7 @@ items:
 ### bundle: blogging-workflow
 description: Write and publish DevelopersIO articles end-to-end (Japanese)
 items:
-- command: write-developersio-articles
-- command: publish-developersio-articles
+- skill: devio
 
 ### bundle: aws-bedrock
 description: Full AWS Bedrock KB + S3 pipeline management with safety guardrails
@@ -61,6 +60,14 @@ files:
 - skills/bedrock-ops/scripts/setup_project.py
 - skills/bedrock-ops/scripts/totp.py
 
+### skill: devio
+description: DevelopersIO blog workflow — draft articles with tag search, publish to Contentful with tag resolution and auto-translation (Japanese)
+files:
+- skills/devio/SKILL.md
+- skills/devio/article.md
+- skills/devio/publish.md
+- skills/devio/scripts/contentful.py
+
 ### skill: release
 description: Repo-aware release automation with pre-flight checks, GitHub issue creation, commit, tag, push, and GitHub release
 files:
@@ -85,16 +92,6 @@ files:
 description: Interactively migrates .env secrets to 1Password using op CLI, replacing values with op:// references (Japanese)
 files:
 - commands/migrate-env-to-1password.md
-
-### command: publish-developersio-articles
-description: Publishes Markdown articles to Contentful CMS as drafts, with create and update support
-files:
-- commands/publish-developersio-articles.md
-
-### command: write-developersio-articles
-description: DevelopersIO blog writing assistant that follows media guidelines and handles frontmatter (Japanese)
-files:
-- commands/write-developersio-articles.md
 
 ---
 

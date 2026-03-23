@@ -2,6 +2,19 @@
 
 All notable changes to this project will be documented in this file.
 
+## [v1.5.0](https://github.com/oharu121/oharu-commands-skills-gems/releases/tag/v1.5.0) - 2026-03-23
+
+### Added
+
+- **Skills**
+  - `devio` — DevelopersIO blog workflow: draft articles with `tags --search` integration for guaranteed Contentful-valid tags, publish to Contentful with automatic tag ID resolution and `targetLocales: ["en"]` auto-translation; includes `tags --refresh/--search/--resolve` CLI subcommands and a local tag cache at `.claude/tags-cache.json`
+
+### Removed
+
+- **Commands**
+  - `write-developersio-articles` — replaced by `skills/devio` (`/devio article <topic>`)
+  - `publish-developersio-articles` — replaced by `skills/devio` (`/devio publish <file>`)
+
 ## [v1.4.0](https://github.com/oharu121/oharu-commands-skills-gems/releases/tag/v1.4.0) - 2026-03-23
 
 ### Added
