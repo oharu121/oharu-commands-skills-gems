@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file.
 
+## [v1.5.1](https://github.com/oharu121/oharu-commands-skills-gems/releases/tag/v1.5.1) - 2026-03-24
+
+### Changed
+
+- **Skills**
+  - `release` — added Safe GitHub Body Write pattern (`--body-file` instead of `--body`) with empty-body verification, Resume State pattern (`.release-tmp/state.json`) for interrupted flow recovery, renamed "pre-flight" to "validation" across all files, added release-notes template, improved Python pattern with `$RUNNER` prefix and pyright type checking, added `format:check` to npm pattern, safer commit staging with explicit file listing, added `.release-tmp/` to `.gitignore`
+
 ## [v1.5.0](https://github.com/oharu121/oharu-commands-skills-gems/releases/tag/v1.5.0) - 2026-03-23
 
 ### Added
@@ -28,14 +35,14 @@ All notable changes to this project will be documented in this file.
 ### Added
 
 - **Skills**
-  - `release` — config file support (`language`, `repo_mode`, `preflight_confirm`) for persistent preferences; skips language and mode prompts on subsequent runs while always running pre-flight
+  - `release` — config file support (`language`, `repo_mode`, `preflight_confirm`) for persistent preferences; skips language and mode prompts on subsequent runs while always running validation
 
 ## [v1.3.0](https://github.com/oharu121/oharu-commands-skills-gems/releases/tag/v1.3.0) - 2026-03-19
 
 ### Added
 
 - **Skills**
-  - `release` — restructured from a monolithic command into a modular skill with repo detection, `AskUserQuestion`-driven pre-flight confirmation, and pattern files for skills-gems, npm, Python, and monorepo repos
+  - `release` — restructured from a monolithic command into a modular skill with repo detection, `AskUserQuestion`-driven validation confirmation, and pattern files for skills-gems, npm, Python, and monorepo repos
 
 ### Removed
 

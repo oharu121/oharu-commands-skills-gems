@@ -1,4 +1,4 @@
-# Pre-flight Pattern: skills-gems
+# Validation Pattern: skills-gems
 
 **Summary for Phase 0 announcement:** sensitive data audit on new/modified skill files.
 
@@ -41,6 +41,11 @@ Approved placeholders:
 - MFA ARNs → `arn:aws:iam::123456789012:mfa/your-username`
 
 Re-run the greps after fixing to confirm clean.
+
+## Version Bump
+
+This repo mode uses **tags only** for versioning — there is no version file to bump.
+The version tag is created in Phase 3, Step 10. No file changes are needed here.
 
 ## On Pass
 

@@ -33,7 +33,7 @@ Richer packages with reference data and templates. Skills are used by Claude Cod
 | [aws-cost-estimate](skills/aws-cost-estimate/) | Generates AWS cost estimates from architecture documents using the AWS Price List API, with optional Calculator link generation |
 | [bedrock-ops](skills/bedrock-ops/) | Manages the AWS Bedrock KB + S3 data pipeline with safety guardrails: S3 sync with force-upload, KB ingestion polling, cost monitoring, and MFA session auto-refresh |
 | [devio](skills/devio/) | DevelopersIO blog workflow: draft articles with tag search integration, publish to Contentful with tag resolution and auto-translation (Japanese) |
-| [release](skills/release/) | Repo-aware release automation with pre-flight checks, GitHub issue + plan file creation, commit, tag, push, and GitHub release. Supports npm, Python, and skills-gems repos |
+| [release](skills/release/) | Repo-aware release automation with validation checks, GitHub issue + plan file creation, commit, tag, push, and GitHub release. Supports npm, Python, and skills-gems repos with safe body writes and resume state |
 
 The AWS diagram skill includes:
 - 7 icon reference files covering Compute, Storage/Database, Networking, App Integration, Analytics/ML, Security, and Common icons
