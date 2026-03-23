@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file.
 
+## [v1.4.0](https://github.com/oharu121/oharu-commands-skills-gems/releases/tag/v1.4.0) - 2026-03-23
+
+### Added
+
+- **Install wizard** — one-liner setup via `claude "Read https://raw.githubusercontent.com/oharu121/oharu-commands-skills-gems/main/INSTALL.md and follow the wizard"`: interactive scope selection, bundle recommendations, existing-install detection with skip/overwrite, automatic command wrapper creation for skills, and Gemini gem instructions
+- **`INSTALL.md`** — wizard meta-prompt that Claude executes to drive the install flow; fetches files from raw GitHub URLs and writes them to the correct local paths
+- **`BUNDLES.md`** — file manifest for all skills and commands plus four curated bundles: `aws-toolkit`, `blogging-workflow`, `aws-bedrock`, `release-automation`
+
 ## [v1.3.1](https://github.com/oharu121/oharu-commands-skills-gems/releases/tag/v1.3.1) - 2026-03-19
 
 ### Added

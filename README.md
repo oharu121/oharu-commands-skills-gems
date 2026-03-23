@@ -2,6 +2,18 @@
 
 A collection of custom commands, skills, and gems for [Claude Code](https://docs.anthropic.com/en/docs/claude-code) and [Gemini](https://gemini.google.com).
 
+## Quick Install
+
+Run this from any directory (no clone needed):
+
+```bash
+claude "Read https://raw.githubusercontent.com/oharu121/oharu-commands-skills-gems/main/INSTALL.md and follow the wizard"
+```
+
+The wizard will ask what you want to install (individual items or bundles), whether to install globally or per-project, and handle everything from there — including fetching the latest files and setting up command wrappers for skills.
+
+---
+
 ## Commands
 
 Markdown instruction files that define slash commands for Claude Code. Place them in your project's `.claude/commands/` directory to use as `/command-name`.
@@ -12,21 +24,6 @@ Markdown instruction files that define slash commands for Claude Code. Place the
 | [migrate-env-to-1password](commands/migrate-env-to-1password.md) | Interactively migrates `.env` secrets to 1Password using `op` CLI, replacing values with `op://` references (Japanese) |
 | [publish-developersio-articles](commands/publish-developersio-articles.md) | Publishes Markdown articles to Contentful CMS as drafts, with create and update support |
 | [write-developersio-articles](commands/write-developersio-articles.md) | DevelopersIO blog writing assistant that follows media guidelines and handles frontmatter (Japanese) |
-
-### Usage
-
-Copy a command file into your project:
-
-```bash
-mkdir -p .claude/commands
-cp commands/generate-bruno-files.md .claude/commands/generate-bruno-files.md
-```
-
-Then use it in Claude Code:
-
-```
-/generate-bruno-files src/api/client.ts
-```
 
 ## Skills
 
@@ -49,29 +46,6 @@ The AWS cost estimate skill includes:
 - AWS Price List API reference with service codes, example queries, and jq parsing
 - Permissions reference for CLI, web search, and Playwright tools
 - Calculator automation guide for generating shareable links via browser automation
-
-### Usage
-
-Copy a skill directory into your project and add a command file to invoke it:
-
-```bash
-mkdir -p .claude/skills .claude/commands
-cp -r skills/release .claude/skills/release
-```
-
-Then add `.claude/commands/release.md`:
-
-```markdown
-# /release
-Load and follow `SKILLS_DIR/SKILL.md`.
-- `SKILLS_DIR` = `.claude/skills/release`
-```
-
-Use it in Claude Code:
-
-```
-/release
-```
 
 ## Gems
 
