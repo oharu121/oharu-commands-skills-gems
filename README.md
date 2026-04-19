@@ -1,39 +1,38 @@
 # oharu-commands-skills-gems
 
-A collection of custom commands, skills, and gems for [Claude Code](https://docs.anthropic.com/en/docs/claude-code) and [Gemini](https://gemini.google.com).
+A collection of custom skills for [Claude Code](https://docs.anthropic.com/en/docs/claude-code) and system prompts for [Gemini](https://gemini.google.com).
 
-## Quick Install
+## Install
 
-Run this from any directory (no clone needed):
+Skills install into `.claude/skills/` (project-scoped) via [Vercel Labs' skills CLI](https://github.com/vercel-labs/skills). Use whichever package manager you prefer:
 
 ```bash
-claude "Read https://raw.githubusercontent.com/oharu121/oharu-commands-skills-gems/main/INSTALL.md and follow the wizard"
+# npm / node
+npx skills add oharu121/oharu-commands-skills-gems/<name>
+
+# pnpm
+pnpm dlx skills add oharu121/oharu-commands-skills-gems/<name>
 ```
 
-The wizard will ask what you want to install (individual items or bundles), whether to install globally or per-project, and handle everything from there — including fetching the latest files and setting up command wrappers for skills.
+Pass `-g` to install to `~/.claude/skills/` (user-scoped). Use `npx skills update` to pull the latest version and `npx skills remove <name>` to uninstall.
 
----
-
-## Commands
-
-Markdown instruction files that define slash commands for Claude Code. Place them in your project's `.claude/commands/` directory to use as `/command-name`.
-
-| Command | Description |
-|---------|-------------|
-| [generate-bruno-files](commands/generate-bruno-files.md) | Reads source code to extract HTTP requests and generates `.bru` files for the [Bruno](https://www.usebruno.com/) API client |
-| [migrate-env-to-1password](commands/migrate-env-to-1password.md) | Interactively migrates `.env` secrets to 1Password using `op` CLI, replacing values with `op://` references (Japanese) |
+Works with any agent supported by [vercel-labs/skills](https://github.com/vercel-labs/skills) — the CLI auto-detects `.claude/`, `.cursor/`, `.codex/`, and 40+ others. Claude Code is the primary target (some skills use Claude-specific frontmatter like `user-invocable`); other agents still work but may have a reduced experience.
 
 ## Skills
 
-Richer packages with reference data and templates. Skills are used by Claude Code to perform specialized tasks.
+Richer packages with reference data, templates, and scripts. Skills marked with `user-invocable: true` are also callable as `/skill-name` slash commands.
 
-| Skill | Description |
-|-------|-------------|
-| [aws-architecture-diagram](skills/aws-architecture-diagram/) | Generates Draw.io XML diagrams with accurate AWS service icons, supporting technical and non-technical audience modes |
-| [aws-cost-estimate](skills/aws-cost-estimate/) | Generates AWS cost estimates from architecture documents using the AWS Price List API, with optional Calculator link generation |
-| [bedrock-ops](skills/bedrock-ops/) | Manages the AWS Bedrock KB + S3 data pipeline with safety guardrails: S3 sync with force-upload, KB ingestion polling, cost monitoring, and MFA session auto-refresh |
-| [devio](skills/devio/) | DevelopersIO blog workflow: draft articles with tag search integration, publish to Contentful with tag resolution and auto-translation (Japanese) |
-| [release](skills/release/) | Repo-aware release automation with validation checks, GitHub issue + plan file creation, commit, tag, push, and GitHub release. Supports npm, Python, and skills-gems repos with safe body writes and resume state |
+| Skill | Description | Install |
+|-------|-------------|---------|
+| [aws-architecture-diagram](skills/aws-architecture-diagram/) | Generates Draw.io XML diagrams with accurate AWS service icons, supporting technical and non-technical audience modes | `npx skills add oharu121/oharu-commands-skills-gems/aws-architecture-diagram` |
+| [aws-cost-estimate](skills/aws-cost-estimate/) | Generates AWS cost estimates from architecture documents using the AWS Price List API, with optional Calculator link generation | `npx skills add oharu121/oharu-commands-skills-gems/aws-cost-estimate` |
+| [bedrock-ops](skills/bedrock-ops/) | Manages the AWS Bedrock KB + S3 data pipeline with safety guardrails: S3 sync with force-upload, KB ingestion polling, cost monitoring, and MFA session auto-refresh | `npx skills add oharu121/oharu-commands-skills-gems/bedrock-ops` |
+| [devio](skills/devio/) | DevelopersIO blog workflow: draft articles with tag search integration, publish to Contentful with tag resolution and auto-translation (Japanese) | `npx skills add oharu121/oharu-commands-skills-gems/devio` |
+| [generate-bruno-files](skills/generate-bruno-files/) | Reads source code to extract HTTP requests and generates `.bru` files for the [Bruno](https://www.usebruno.com/) API client | `npx skills add oharu121/oharu-commands-skills-gems/generate-bruno-files` |
+| [migrate-env-to-1password](skills/migrate-env-to-1password/) | Interactively migrates `.env` secrets to 1Password using `op` CLI, replacing values with `op://` references (Japanese) | `npx skills add oharu121/oharu-commands-skills-gems/migrate-env-to-1password` |
+| [release](skills/release/) | Repo-aware release automation with validation checks, GitHub issue + plan file creation, commit, tag, push, and GitHub release. Supports npm, Python, and skills-gems repos with safe body writes and resume state | `npx skills add oharu121/oharu-commands-skills-gems/release` |
+
+Install `aws-architecture-diagram` and `aws-cost-estimate` together for a design → price workflow.
 
 The AWS diagram skill includes:
 - 7 icon reference files covering Compute, Storage/Database, Networking, App Integration, Analytics/ML, Security, and Common icons
@@ -48,7 +47,7 @@ The AWS cost estimate skill includes:
 
 ## Gems
 
-System prompts for [Gemini Gems](https://gemini.google.com/gems). Create a new Gem in Gemini and paste the content as the gem instructions.
+System prompts for [Gemini Gems](https://gemini.google.com/gems). Vercel's skills CLI doesn't install these — create a new Gem in Gemini and paste the file content as the gem instructions.
 
 | Gem | Description |
 |-----|-------------|

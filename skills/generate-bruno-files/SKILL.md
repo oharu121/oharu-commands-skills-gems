@@ -1,3 +1,11 @@
+---
+name: generate-bruno-files
+description: Create Bruno .bru request files for API endpoints found in the project source code. Use when the user asks to generate Bruno API files from source code, mentions the Bruno API client, or wants to scaffold .bru files for HTTP requests.
+user-invocable: true
+allowed-tools: Bash(ls *), Read, Write, Edit, Glob, Grep, AskUserQuestion
+argument-hint: "source file path or description of which API calls to generate .bru files for"
+---
+
 Create Bruno .bru request files for API endpoints found in the project source code.
 
 Input: $ARGUMENTS (a source file path or description of which API calls to generate .bru files for)

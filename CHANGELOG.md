@@ -2,6 +2,30 @@
 
 All notable changes to this project will be documented in this file.
 
+## [v1.6.0](https://github.com/oharu121/oharu-commands-skills-gems/releases/tag/v1.6.0) - 2026-04-19
+
+### Added
+
+- **Skills**
+  - `generate-bruno-files` — promoted from `commands/generate-bruno-files.md` with skill frontmatter (`user-invocable: true`, `allowed-tools`, `argument-hint`); retains `/generate-bruno-files` slash-command invocation
+  - `migrate-env-to-1password` — promoted from `commands/migrate-env-to-1password.md` (Japanese) with equivalent frontmatter; retains `/migrate-env-to-1password` invocation
+- **Install via Vercel skills CLI** — `npx skills add oharu121/oharu-commands-skills-gems/<name>` (or `pnpm dlx skills add ...`) is now the primary install path; auto-detects `.claude/`, `.cursor/`, `.codex/`, and 40+ other agents
+
+### Changed
+
+- **README** — rewrote install section to document `npx skills add` and `pnpm dlx skills add`; merged Commands table into Skills table; added cross-agent support note
+
+### Removed
+
+- **`INSTALL.md`** — custom prose-based install wizard; superseded by `npx skills add`
+- **`BUNDLES.md`** — bundle manifest and docs; three of four entries were single-skill aliases, and the sole genuine pairing (aws-architecture-diagram + aws-cost-estimate) now lives as a one-line note in README
+- **`commands/` directory** — both commands promoted to skills; directory no longer exists
+
+### Breaking
+
+- The old install one-liner `claude "Read https://raw.../INSTALL.md and follow the wizard"` returns 404 — switch to `npx skills add oharu121/oharu-commands-skills-gems/<name>`
+- `commands/*.md` raw URLs now 404 — the promoted skills live at `skills/generate-bruno-files/` and `skills/migrate-env-to-1password/`
+
 ## [v1.5.1](https://github.com/oharu121/oharu-commands-skills-gems/releases/tag/v1.5.1) - 2026-03-24
 
 ### Changed

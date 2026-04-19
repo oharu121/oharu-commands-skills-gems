@@ -1,3 +1,10 @@
+---
+name: migrate-env-to-1password
+description: Migrate .env secrets to 1Password using the op CLI, replacing plaintext values with op:// references (Japanese). Use when the user wants to move .env secrets into 1Password, mentions the 1Password CLI, or asks to replace environment variables with vault references.
+user-invocable: true
+allowed-tools: Bash(op *), Bash(which op), Bash(brew install *), Read, Write, Edit, AskUserQuestion
+---
+
 プロジェクトの `.env` ファイルに含まれるシークレットを 1Password CLI (`op`) に移行します。
 
 ユーザーの入力: $ARGUMENTS
