@@ -1,22 +1,25 @@
-# oharu-commands-skills-gems
+# skills
 
-A collection of custom skills for [Claude Code](https://docs.anthropic.com/en/docs/claude-code) and system prompts for [Gemini](https://gemini.google.com).
+A collection of custom skills for [Claude Code](https://docs.anthropic.com/en/docs/claude-code) and system prompts for [Gemini](https://gemini.google.com). Previously published as `oharu-commands-skills-gems`.
 
 ## Install
 
-Skills install into `.claude/skills/` (project-scoped) via [Vercel Labs' skills CLI](https://github.com/vercel-labs/skills). Use whichever package manager you prefer:
+All skills follow the open [Agent Skills specification](https://agentskills.io) and install via any compatible CLI. Pick whichever is easiest:
 
 ```bash
+# GitHub CLI (gh v2.90+) — official, preview before install
+gh skill install oharu121/skills <name>
+
 # npm / node
-npx skills add oharu121/oharu-commands-skills-gems/<name>
+npx skills add oharu121/skills/<name>
 
 # pnpm
-pnpm dlx skills add oharu121/oharu-commands-skills-gems/<name>
+pnpm dlx skills add oharu121/skills/<name>
 ```
 
-Pass `-g` to install to `~/.claude/skills/` (user-scoped). Use `npx skills update` to pull the latest version and `npx skills remove <name>` to uninstall.
+Use `gh skill preview oharu121/skills <name>` to inspect a skill's content before installing. Pass `-g` to install user-scoped (`~/.claude/skills/`). Update with `gh skill update` or `npx skills update`; remove with `gh skill remove` or `npx skills remove`.
 
-Works with any agent supported by [vercel-labs/skills](https://github.com/vercel-labs/skills) — the CLI auto-detects `.claude/`, `.cursor/`, `.codex/`, and 40+ others. Claude Code is the primary target (some skills use Claude-specific frontmatter like `user-invocable`); other agents still work but may have a reduced experience.
+Works with any agent supported by these CLIs — both auto-detect `.claude/`, `.cursor/`, `.codex/`, and 40+ others. Claude Code is the primary target (some skills use Claude-specific frontmatter like `user-invocable`); other agents still work but may have a reduced experience.
 
 ## Skills
 
@@ -24,13 +27,13 @@ Richer packages with reference data, templates, and scripts. Skills marked with 
 
 | Skill | Description | Install |
 |-------|-------------|---------|
-| [aws-architecture-diagram](skills/aws-architecture-diagram/) | Generates Draw.io XML diagrams with accurate AWS service icons, supporting technical and non-technical audience modes | `npx skills add oharu121/oharu-commands-skills-gems/aws-architecture-diagram` |
-| [aws-cost-estimate](skills/aws-cost-estimate/) | Generates AWS cost estimates from architecture documents using the AWS Price List API, with optional Calculator link generation | `npx skills add oharu121/oharu-commands-skills-gems/aws-cost-estimate` |
-| [bedrock-ops](skills/bedrock-ops/) | Manages the AWS Bedrock KB + S3 data pipeline with safety guardrails: S3 sync with force-upload, KB ingestion polling, cost monitoring, and MFA session auto-refresh | `npx skills add oharu121/oharu-commands-skills-gems/bedrock-ops` |
-| [devio](skills/devio/) | DevelopersIO blog workflow: draft articles with tag search integration, publish to Contentful with tag resolution and auto-translation (Japanese) | `npx skills add oharu121/oharu-commands-skills-gems/devio` |
-| [generate-bruno-files](skills/generate-bruno-files/) | Reads source code to extract HTTP requests and generates `.bru` files for the [Bruno](https://www.usebruno.com/) API client | `npx skills add oharu121/oharu-commands-skills-gems/generate-bruno-files` |
-| [migrate-env-to-1password](skills/migrate-env-to-1password/) | Interactively migrates `.env` secrets to 1Password using `op` CLI, replacing values with `op://` references (Japanese) | `npx skills add oharu121/oharu-commands-skills-gems/migrate-env-to-1password` |
-| [release](skills/release/) | Repo-aware release automation with validation checks, GitHub issue + plan file creation, commit, tag, push, and GitHub release. Supports npm, Python, and skills-gems repos with safe body writes and resume state | `npx skills add oharu121/oharu-commands-skills-gems/release` |
+| [aws-architecture-diagram](skills/aws-architecture-diagram/) | Generates Draw.io XML diagrams with accurate AWS service icons, supporting technical and non-technical audience modes | `npx skills add oharu121/skills/aws-architecture-diagram` |
+| [aws-cost-estimate](skills/aws-cost-estimate/) | Generates AWS cost estimates from architecture documents using the AWS Price List API, with optional Calculator link generation | `npx skills add oharu121/skills/aws-cost-estimate` |
+| [bedrock-ops](skills/bedrock-ops/) | Manages the AWS Bedrock KB + S3 data pipeline with safety guardrails: S3 sync with force-upload, KB ingestion polling, cost monitoring, and MFA session auto-refresh | `npx skills add oharu121/skills/bedrock-ops` |
+| [devio](skills/devio/) | DevelopersIO blog workflow: draft articles with tag search integration, publish to Contentful with tag resolution and auto-translation (Japanese) | `npx skills add oharu121/skills/devio` |
+| [generate-bruno-files](skills/generate-bruno-files/) | Reads source code to extract HTTP requests and generates `.bru` files for the [Bruno](https://www.usebruno.com/) API client | `npx skills add oharu121/skills/generate-bruno-files` |
+| [migrate-env-to-1password](skills/migrate-env-to-1password/) | Interactively migrates `.env` secrets to 1Password using `op` CLI, replacing values with `op://` references (Japanese) | `npx skills add oharu121/skills/migrate-env-to-1password` |
+| [release](skills/release/) | Repo-aware release automation with validation checks, GitHub issue + plan file creation, commit, tag, push, and GitHub release. Supports npm, Python, and skills-gems repos with safe body writes and resume state | `npx skills add oharu121/skills/release` |
 
 Install `aws-architecture-diagram` and `aws-cost-estimate` together for a design → price workflow.
 

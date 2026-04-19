@@ -2,29 +2,31 @@
 
 All notable changes to this project will be documented in this file.
 
-## [v1.6.0](https://github.com/oharu121/oharu-commands-skills-gems/releases/tag/v1.6.0) - 2026-04-19
+## [v1.6.0](https://github.com/oharu121/skills/releases/tag/v1.6.0) - 2026-04-19
 
 ### Added
 
 - **Skills**
   - `generate-bruno-files` — promoted from `commands/generate-bruno-files.md` with skill frontmatter (`user-invocable: true`, `allowed-tools`, `argument-hint`); retains `/generate-bruno-files` slash-command invocation
   - `migrate-env-to-1password` — promoted from `commands/migrate-env-to-1password.md` (Japanese) with equivalent frontmatter; retains `/migrate-env-to-1password` invocation
-- **Install via Vercel skills CLI** — `npx skills add oharu121/oharu-commands-skills-gems/<name>` (or `pnpm dlx skills add ...`) is now the primary install path; auto-detects `.claude/`, `.cursor/`, `.codex/`, and 40+ other agents
+- **Install via Agent Skills spec CLIs** — `gh skill install oharu121/skills <name>`, `npx skills add oharu121/skills/<name>`, or `pnpm dlx skills add oharu121/skills/<name>` is now the primary install path; auto-detects `.claude/`, `.cursor/`, `.codex/`, and 40+ other agents
 
 ### Changed
 
-- **README** — rewrote install section to document `npx skills add` and `pnpm dlx skills add`; merged Commands table into Skills table; added cross-agent support note
+- **Repository renamed** from `oharu-commands-skills-gems` to `skills`. GitHub redirects old URLs automatically, but the canonical path is now `oharu121/skills`.
+- **README** — rewrote install section to document `gh skill install`, `npx skills add`, and `pnpm dlx skills add`; merged Commands table into Skills table; added cross-agent support note
 
 ### Removed
 
-- **`INSTALL.md`** — custom prose-based install wizard; superseded by `npx skills add`
+- **`INSTALL.md`** — custom prose-based install wizard; superseded by `npx skills add` / `gh skill install`
 - **`BUNDLES.md`** — bundle manifest and docs; three of four entries were single-skill aliases, and the sole genuine pairing (aws-architecture-diagram + aws-cost-estimate) now lives as a one-line note in README
 - **`commands/` directory** — both commands promoted to skills; directory no longer exists
 
 ### Breaking
 
-- The old install one-liner `claude "Read https://raw.../INSTALL.md and follow the wizard"` returns 404 — switch to `npx skills add oharu121/oharu-commands-skills-gems/<name>`
+- The old install one-liner `claude "Read https://raw.../INSTALL.md and follow the wizard"` returns 404 — switch to `gh skill install oharu121/skills <name>` or `npx skills add oharu121/skills/<name>`
 - `commands/*.md` raw URLs now 404 — the promoted skills live at `skills/generate-bruno-files/` and `skills/migrate-env-to-1password/`
+- Raw GitHub URLs using the old repo name (`oharu-commands-skills-gems`) continue to redirect, but the canonical path is now `oharu121/skills`
 
 ## [v1.5.1](https://github.com/oharu121/oharu-commands-skills-gems/releases/tag/v1.5.1) - 2026-03-24
 
