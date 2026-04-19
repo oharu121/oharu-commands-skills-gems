@@ -1,0 +1,11 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(gh search *)",
+      "Bash(gh api *)",
+      "Bash(curl -s 'https://api.github.com/repos/vercel-labs/skills/contents/src')",
+      "Bash(curl -s 'https://raw.githubusercontent.com/vercel-labs/skills/main/src/local-lock.ts')",
+      "Bash(gh issue *)"
+    ]
+  }
+}
