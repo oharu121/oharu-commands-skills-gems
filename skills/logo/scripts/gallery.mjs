@@ -28,7 +28,7 @@
 
 import { createServer } from 'node:http';
 import { readdirSync, readFileSync, writeFileSync, existsSync } from 'node:fs';
-import { basename, extname, join, resolve } from 'node:path';
+import { basename, extname, join, resolve, sep } from 'node:path';
 
 const args = process.argv.slice(2);
 const dir = resolve(args.find((a) => !a.startsWith('--')) ?? '.');
@@ -169,11 +169,19 @@ if (noServe) process.exit(0);
  */
 const TYPES = { '.html': 'text/html', '.svg': 'image/svg+xml', '.json': 'application/json' };
 
+/*
+ * Compared with a trailing separator. A bare `startsWith(dir)` also matches any
+ * sibling whose name merely begins with the same string — with `dir` at
+ * `/tmp/logo`, a request for `../logo-private/secret` resolves to
+ * `/tmp/logo-private/secret` and passes. The separator makes the check mean
+ * "inside this directory" rather than "starts with these characters".
+ */
+const root = dir.endsWith(sep) ? dir : dir + sep;
+
 createServer((req, res) => {
 	const rel = req.url === '/' ? 'index.html' : decodeURIComponent(req.url.split('?')[0]).replace(/^\/+/, '');
 	const file = resolve(dir, rel);
-	// Never serve outside the gallery directory.
-	if (!file.startsWith(dir)) {
+	if (file !== dir && !file.startsWith(root)) {
 		res.writeHead(403);
 		res.end('forbidden');
 		return;
@@ -188,4 +196,6 @@ createServer((req, res) => {
 	}
 	res.writeHead(200, { 'Content-Type': TYPES[extname(file)] ?? 'application/octet-stream' });
 	res.end(body);
-}).listen(port, () => console.log(`http://localhost:${port}/`));
+	// Loopback only. This serves a scratch directory to whoever is designing the
+	// mark; there is no reason for it to be reachable from the rest of the network.
+}).listen(port, '127.0.0.1', () => console.log(`http://localhost:${port}/`));
