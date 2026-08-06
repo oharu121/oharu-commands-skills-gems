@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file.
 
+## [Unreleased]
+
+### Added
+
+- **Skills**
+  - `logo` — designs a mark through reference study, generated concept rounds, and a
+    browsable contact sheet. Every candidate renders large, at 32px, and at 16px, because
+    16px is the size that actually eliminates candidates and the one nobody checks until
+    the favicon ships. Bundles `scripts/gallery.mjs` (contact sheet + local server, no
+    dependencies) and `scripts/outline.py` (bakes real typeface outlines to SVG paths via
+    fontTools + HarfBuzz, so a wordmark ships as geometry with no webfont request)
+
 ## [v1.6.0](https://github.com/oharu121/skills/releases/tag/v1.6.0) - 2026-04-19
 
 ### Added
